@@ -1,0 +1,32 @@
+
+.flex-row {
+        display: flex;
+        flex-wrap: nowrap; /* Evita que los elementos se envuelvan en filas adicionales */
+        overflow-x: auto;
+        width: auto; /* Agrega un scroll horizontal si es necesario */
+      }
+.main-color-bg{
+    background-color: rgb(44, 20, 129);
+}
+.jersey-10-regular {
+    font-family: "Jersey 10", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 10rem;
+}
+.counter-1, .counter-2, .counter-3, .counter-4{
+    font-family: "Jersey 10", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 7rem;
+}
+
+/*@media (max-width: 500px) {
+    .jersey-10-regular {
+      font-size: 5rem;
+    }
+    .jersey-7-regular{
+        font-size: 3rem;
+    }
+  }
+*/  
