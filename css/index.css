@@ -14,12 +14,18 @@
     font-style: normal;
     font-size: 10rem;
 }
-.counter-1, .counter-2, .counter-3, .counter-4{
+.jersey-7-regular {
+  font-family: "Jersey 10", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  font-size: 7rem;
+}
+/* .counter-1, .counter-2, .counter-3, .counter-4{
     font-family: "Jersey 10", sans-serif;
     font-weight: 500;
     font-style: normal;
     font-size: 7rem;
-}
+} */
 
 /*@media (max-width: 500px) {
     .jersey-10-regular {
