@@ -20,19 +20,9 @@
   font-style: normal;
   font-size: 7rem;
 }
-/* .counter-1, .counter-2, .counter-3, .counter-4{
-    font-family: "Jersey 10", sans-serif;
-    font-weight: 500;
-    font-style: normal;
-    font-size: 7rem;
-} */
+.form-control{
+  
+  width: 50%;
+  height: auto;
+}
 
-/*@media (max-width: 500px) {
-    .jersey-10-regular {
-      font-size: 5rem;
-    }
-    .jersey-7-regular{
-        font-size: 3rem;
-    }
-  }
-*/  

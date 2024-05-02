@@ -1,8 +1,9 @@
-import { count2 } from "./utilities.js";
-import {crearNumeroRandom } from "./utilities.js";
+// import { count2 } from "./utilities.js";
+import { generarNumeroAleatorio } from "./utilities.js";
 
-const numero = crearNumeroRandom();
-console.log(numero);
+
+// const [first, setfirst] = useState(0);
+
 document.addEventListener('DOMContentLoaded', function () {
     const inputNumero = document.getElementById('numero');
   
@@ -16,43 +17,64 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     });
   });
-  document.getElementById("enviarBtn").addEventListener("click", function(event) {
-    // Obtener el valor del input
-    var numeroIngresado = document.getElementById("numero").value;
+  document.addEventListener("DOMContentLoaded", function() {
+    const inputNumero = document.getElementById("numero");
+    const enviarBtn = document.getElementById("enviarBtn");
+  
     
-    // Verificar si el número es válido
-    if (numeroIngresado >= 1000 && numeroIngresado <= 9999) {
-        // Realizar acciones con el número capturado
-        console.log("Número capturado:", numeroIngresado);
-        event.preventDefault();
-        
-        let numeroString = localStorage.getItem('numeroAleatorio')
-        if(numeroString){
-          let numeroArray = numeroString.split('');
-          let contadores = [];
-          for (let i = 0; i < 4; i++) {
-            if (numeroArray[i] == numeroIngresado[i]) {
-              document.getElementById(`counter-${i + 1}`).classList.remove("bg-black");
-              document.getElementById(`counter-${i + 1}`).classList.remove("bg-danger");
-              document.getElementById(`counter-${i + 1}`).classList.add("bg-success");
-              //count(`counter`);
-              contadores.push(numeroArray[i]);
-              
-            } else {
-              document.getElementById(`counter-${i + 1}`).classList.remove("bg-black");
-              document.getElementById(`counter-${i + 1}`).classList.remove("bg-success");
-              document.getElementById(`counter-${i + 1}`).classList.add("bg-danger");
-            }
-          }
-          count2(".counter", contadores);
-          if (contadores.length === 4) {
-            alert("Haz ganado");
-          
-          }
-        }
-        
-        // Aquí puedes agregar más acciones según tus necesidades
-    } else {
-        alert("Por favor ingrese un número válido de hasta 4 cifras.");
+    function handleKeyPress(event) {
+      if (event.key === "Enter") {
+        event.preventDefault(); 
+        enviarFormulario();
+      }
     }
-});
+  
+    // Función para enviar el formulario
+    function enviarFormulario() {
+      let numeroIngresado = document.getElementById("numero").value;
+    
+      if (numeroIngresado.length === 4) {
+          
+          console.log("Número capturado:", numeroIngresado);
+          event.preventDefault();
+          
+          let numeroString = localStorage.getItem('numeroAleatorio')
+          if(numeroString){
+            let numeroArray = numeroString.split('');
+            let contadores = [];
+            for (let i = 0; i < numeroArray.length; i++) {
+              if (numeroArray[i] == numeroIngresado[i]) {
+                document.getElementById(`counter-${i + 1}`).classList.remove("bg-black");
+                document.getElementById(`counter-${i + 1}`).classList.remove("bg-danger");
+                document.getElementById(`counter-${i + 1}`).classList.add("bg-success");
+                document.getElementById(`counter-${i + 1}`).textContent = numeroArray[i];
+                contadores.push(i);
+                
+              } else {
+                document.getElementById(`counter-${i + 1}`).classList.remove("bg-black");
+                document.getElementById(`counter-${i + 1}`).classList.remove("bg-success");
+                document.getElementById(`counter-${i + 1}`).classList.add("bg-danger");
+  
+              }
+            }
+            if (contadores.length === 4) {
+              if (confirm("¡Haz ganado! ¿Quieres volver a jugar?")) {
+                document.getElementById("numero").value = "";
+                localStorage.setItem("numeroAleatorio", null);
+                generarNumeroAleatorio();
+                window.location.reload();
+              } else {
+                
+              }
+            }
+  
+          }
+      } else {
+          alert("Por favor ingrese un número válido de hasta 4 cifras.");
+      }
+    }
+  
+    inputNumero.addEventListener("keypress", handleKeyPress);
+    enviarBtn.addEventListener("click", enviarFormulario);
+    
+  });
