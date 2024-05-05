@@ -10,66 +10,67 @@ Luego crea la interfaz necesaria para que el usuario pueda crear un objeto perso
 
 */
 
-class Persona {
-  constructor(nombre, edad, DNI, sexo, peso, altura, añoDeNacimiento) {
+export class Persona {
+  constructor(nombre, DNI, sexo, peso, altura, fechaNacimiento, telefono) {
     this.nombre = nombre;
-    this.edad = edad;
+    this.fechaNacimiento = fechaNacimiento;
+    this.edad = this.calcularEdad();
     this.DNI = DNI;
     this.sexo = sexo;
     this.peso = peso;
     this.altura = altura;
-    this.añoDeNacimiento = añoDeNacimiento;
+    this.telefono = telefono;
+  }
+
+  calcularEdad() {
+    if (!this.fechaNacimiento || !(this.fechaNacimiento instanceof Date)) {
+      console.error("Error: La fecha de nacimiento no es válida.");
+      return null;
+    }
+
+    const fechaActual = new Date();
+    const añoActual = fechaActual.getFullYear();
+    const mesActual = fechaActual.getMonth() + 1;
+    const diaActual = fechaActual.getDate();
+
+    const añoNacimiento = this.fechaNacimiento.getFullYear();
+    const mesNacimiento = this.fechaNacimiento.getMonth() + 1;
+    const diaNacimiento = this.fechaNacimiento.getDate();
+
+    let edad = añoActual - añoNacimiento;
+
+    if (mesActual < mesNacimiento || (mesActual === mesNacimiento && diaActual < diaNacimiento)) {
+      edad--;
+    }
+
+    return edad;
   }
 
   mostrarGeneracion() {
     const generaciones = [
-      {
-        nombre: "Silent",
-        rango: { inicio: 1930, fin: 1948 },
-        rasgo: "Austeridad",
-      },
-      {
-        nombre: "Baby Boomer",
-        rango: { inicio: 1948, fin: 1968 },
-        rasgo: "Ambición",
-      },
-      {
-        nombre: "X",
-        rango: { inicio: 1969, fin: 1980 },
-        rasgo: "Obsesión por el éxito",
-      },
-      {
-        nombre: "Millennial",
-        rango: { inicio: 1981, fin: 1993 },
-        rasgo: "Frustración",
-      },
-      {
-        nombre: "Z",
-        rango: { inicio: 1994, fin: 2010 },
-        rasgo: "Irreverencia",
-      },
+      { nombre: "Silent", rango: { inicio: 1930, fin: 1948 }, rasgo: "Austeridad" },
+      { nombre: "Baby Boomer", rango: { inicio: 1948, fin: 1968 }, rasgo: "Ambición" },
+      { nombre: "X", rango: { inicio: 1969, fin: 1980 }, rasgo: "Obsesión por el éxito" },
+      { nombre: "Millennial", rango: { inicio: 1981, fin: 1993 }, rasgo: "Frustración" },
+      { nombre: "Z", rango: { inicio: 1994, fin: 2010 }, rasgo: "Irreverencia" },
     ];
 
+    const añoNac = this.fechaNacimiento.getFullYear();
+
     const generacion = generaciones.find((generacion) => {
-      return (
-        this.añoNac >= generacion.rango.inicio &&
-        this.añoNac <= generacion.rango.fin
-      );
+      return añoNac >= generacion.rango.inicio && añoNac <= generacion.rango.fin;
     });
 
     return generacion
       ? `La generación ${generacion.nombre} su rasgo es ${generacion.rasgo}`
-      : "Año de nacimiento inválido";
+      : "Año de nacimiento inválido / fuera del rango de 1930 a 2010";
   }
+
   esMayorDeEdad() {
-    if (this.edad >= 18) {
-      return true;
-    } else {
-      return false;
-    }
+    return this.edad >= 18;
   }
+
   mostrarDatos() {
-    return `Nombre: ${this.nombre}\nEdad: ${this.edad}\nDNI: ${this.dni}\nSexo: ${this.sexo}\nPeso: ${this.peso}\nAltura: ${this.altura}\nAño de nacimiento: ${this.añoNac}`;
+    return `Nombre: ${this.nombre}\nEdad: ${this.edad}\nDNI: ${this.DNI}\nSexo: ${this.sexo}\nPeso: ${this.peso}\nAltura: ${this.altura}\nAño de nacimiento: ${this.fechaNacimiento}`;
   }
-  
 }
