@@ -1,5 +1,4 @@
 
-//document.addEventListener('DOMContentLoad', function (){
 
     const btnAddTask = document.getElementById("btnAddTask");
     const inputTask = document.getElementById("inputTask");
@@ -20,9 +19,7 @@
       inputTask.value = "";
       const btnDeleteTask = li.querySelector('.btnDeleteTask');
       btnDeleteTask.addEventListener('click', function () {
-          li.remove(); // Eliminar la tarea al hacer clic en el botón
+          li.remove(); 
         });
     }
 });
-
-//});
