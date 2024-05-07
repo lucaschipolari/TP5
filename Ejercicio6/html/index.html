@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+
+    <title>Document</title>
+  </head>
+  <body>
+    <h2>Ingrese una hora válida:</h2>
+    <form id="horaForm">
+      <label for="hora">Hora (HH):</label>
+      <input type="text" id="hora" name="hora" maxlength="2">
+      <label for="minutos">Minutos (MM):</label>
+      <input type="text" id="minutos" name="minutos" maxlength="2">
+      <label for="segundos">Segundos (SS):</label>
+      <input type="text" id="segundos" name="segundos" maxlength="2">
+      <button type="submit">Validar</button>
+    </form>
+  
+    <div id="mensaje"></div>
+    <div id="timer">00:00:00</div>
+    <button id="btnIniciar" disabled>Iniciar</button>
+    <button id="btnPausar" disabled>Pausar</button>
+    <button id="btnReiniciar" disabled>Reiniciar</button>
+    </div>
+    <div id="mensaje"></div>
+    <script type="module" src="../js/index.js"></script>
+  </body>
+</html>
